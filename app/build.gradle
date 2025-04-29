@@ -1,0 +1,81 @@
+plugins {
+    id 'com.android.application'
+    id 'org.jetbrains.kotlin.android'
+    id 'kotlin-parcelize'
+}
+
+configurations.all {
+    resolutionStrategy {
+        force 'com.google.crypto.tink:tink-android:1.7.0'
+    }
+}
+repositories {
+    jcenter()
+    google()
+}
+android {
+    compileSdk = 35
+
+    sourceSets {
+        main {
+            jniLibs.srcDirs += ['../remoteClientLib/jni/libs/deps/FreeRDP/client/Android/Studio/freeRDPCore/src/main/jniLibs']
+            jniLibs.srcDirs += ['../remoteClientLib/src/main/jniLibs']
+        }
+    }
+
+    defaultConfig {
+        applicationId = "com.example.loginregistrationfragmentapp"
+        minSdk = 30
+        targetSdk = 35
+        versionCode = 1
+        versionName = "1.0"
+        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+
+        ndk.abiFilters 'armeabi-v7a', 'arm64-v8a', 'x86' ,'x86_64'
+        multiDexEnabled true
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    compileOptions {
+        sourceCompatibility = JavaVersion.VERSION_11
+        targetCompatibility = JavaVersion.VERSION_11
+    }
+    kotlinOptions {
+        jvmTarget = '11'
+    }
+    namespace 'com.example.loginregistrationfragmentapp'
+    buildFeatures {
+        viewBinding true
+    }
+}
+
+dependencies {
+    implementation 'com.google.code.gson:gson:2.12.1'
+//    implementation 'androidx.security:security-crypto:1.1.0-alpha06' /*{
+//        exclude group: 'com.google.crypto.tink', module: 'tink-android'
+//    }
+//    implementation 'com.google.crypto.tink:tink-android:1.7.0'*/
+    implementation 'androidx.core:core-ktx:1.15.0'
+    implementation 'androidx.appcompat:appcompat:1.7.0'
+    implementation 'com.google.android.material:material:1.12.0'
+    implementation 'androidx.constraintlayout:constraintlayout:2.2.1'
+    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
+    implementation 'androidx.activity:activity-ktx:1.10.1'
+    implementation 'androidx.activity:activity:1.8.0'
+    implementation 'com.squareup.okhttp3:okhttp:4.9.3'
+
+    implementation project(':remoteClientLib')
+    implementation project(':bVNC')
+    implementation project(':common')
+    implementation project(':pubkeyGenerator')
+
+    testImplementation 'junit:junit:4.13.2'
+    androidTestImplementation 'androidx.test.ext:junit:1.2.1'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.6.1'
+    implementation "androidx.security:security-identity-credential:1.0.0-alpha03"
+}

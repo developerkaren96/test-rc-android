@@ -1,0 +1,18 @@
+<resources>
+    <string name="app_name">Remote Console</string>
+    <string name="auth_logo_name">BFG™ Remote Console</string>
+    <string name="auth_ip">FQDN/IP</string>
+    <string name="auth_username">Username</string>
+    <string name="auth_password">Password</string>
+    <string name="auth_remember">Remember</string>
+    <string name="auth_login">Login</string>
+    <string name="error_ip_required">IP-адрес обязателен для заполнения</string>
+    <string name="error_invalid_ip">Неверный формат IP-адреса</string>
+    <string name="error_username_required">Имя пользователя обязательно для заполнения</string>
+    <string name="error_password_required">Пароль обязателен для заполнения</string>
+    <string name="error_password_too_short">Пароль должен быть не менее 6 символов</string>
+    <string name="login_success">Успешный вход</string>
+    <string name="title_activity_video">VideoActivity</string>
+    <string name="dummy_button">Dummy Button</string>
+    <string name="dummy_content">DUMMY\nCONTENT</string>
+</resources>

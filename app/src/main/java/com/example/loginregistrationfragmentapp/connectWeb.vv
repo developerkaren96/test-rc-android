@@ -1,0 +1,7 @@
+[virt-viewer]
+type=spice
+host=127.0.0.1
+port=5900
+password=ВАШ_ПАРОЛЬ
+proxy=wss://10.10.101.83/ui/vms/bxrudjn2/ws
+# disable-this-file=1 (опционально, чтобы файл удалился после использования)

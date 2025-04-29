@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="horizontal">
+
+    <LinearLayout
+        android:layout_width="330dp"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:paddingHorizontal="20dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:paddingStart="20dp"
+            tools:ignore="RtlSymmetry">
+
+            <ImageView
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_margin="0dp"
+                android:paddingStart="15dp"
+                android:paddingEnd="20dp"
+                android:scaleType="centerCrop"
+                android:src="@drawable/logo" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/auth_logo_name"
+                android:textColor="@color/black"
+                android:textSize="17sp" />
+        </LinearLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/host_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/auth_ip">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/auth_host"
+                android:layout_width="match_parent"
+                android:layout_height="55dp"
+                android:background="#fff"
+                android:paddingStart="0dp"
+                tools:ignore="RtlSymmetry" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/username_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/auth_username">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/auth_username"
+                android:layout_width="match_parent"
+                android:layout_height="55dp"
+                android:background="#fff"
+                android:inputType="text"
+                android:paddingStart="0dp"
+                tools:ignore="RtlSymmetry" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/password_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/auth_password"
+            app:endIconMode="password_toggle">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/auth_password"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#fff"
+                android:inputType="textPassword"
+                android:minHeight="55dp"
+                android:paddingStart="0dp"
+                android:text=""
+                android:textColor="@color/black"
+                tools:ignore="RtlSymmetry" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <CheckBox
+            android:id="@+id/remember"
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:layout_marginVertical="20dp"
+            android:layout_marginEnd="15dp"
+            android:buttonTint="@color/purple_500"
+            android:checked="true"
+            android:text="@string/auth_remember" />
+
+        <FrameLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <Button
+                android:id="@+id/login"
+                style="?attr/materialButtonOutlinedStyle"
+                android:layout_width="290dp"
+                android:layout_height="wrap_content"
+                android:text="@string/auth_login"
+                android:textColor="@color/white"
+                app:backgroundTint="@color/MainColor"
+                app:cornerRadius="8dp" />
+
+            <ProgressBar
+                android:id="@+id/progressBar"
+                style="?android:attr/progressBarStyleSmall"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_gravity="center"
+                android:visibility="invisible" />
+        </FrameLayout>
+    </LinearLayout>
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="0dp"
+        android:contentDescription="@string/app_name"
+        android:padding="0dp"
+        android:scaleType="fitCenter"
+        android:src="@drawable/auth_bg_new" />
+</LinearLayout>
