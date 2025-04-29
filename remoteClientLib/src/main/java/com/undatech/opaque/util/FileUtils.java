@@ -128,7 +128,7 @@ public class FileUtils {
 
         // If currentVersion != lastVersion, or if the file isn't present,
         // we write out the file and save the current version in the prefs.
-        android.util.Log.e(TAG, "Will output from assets to file named: " + outFileName);
+        Log.e(TAG, "Will output from assets to file named: " + outFileName);
         File file = new File(context.getFilesDir() + "/" + outFileName);
         if (!file.exists() || !currentVersion.equals(lastVersion)) {
             // Open the asset file
@@ -149,12 +149,12 @@ public class FileUtils {
             fos.close();
 
             // Update version
-            android.util.Log.i(TAG, "Updating version of file: " + outFileName);
+            Log.i(TAG, "Updating version of file: " + outFileName);
             SharedPreferences.Editor editor = sp.edit();
             editor.putString(outFileName + "_lastVersion", currentVersion);
             editor.apply();
         } else {
-            android.util.Log.i(TAG, "Current version of file already exists: " + outFileName);
+            Log.i(TAG, "Current version of file already exists: " + outFileName);
         }
     }
 

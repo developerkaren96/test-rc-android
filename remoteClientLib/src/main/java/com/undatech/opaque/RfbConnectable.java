@@ -87,7 +87,7 @@ public abstract class RfbConnectable implements DrawableReallocatedListener {
     public abstract void setCertificateAccepted(boolean certificateAccepted);
 
     protected void remoteClipboardChanged(String data) {
-        android.util.Log.d(TAG, "remoteClipboardChanged called.");
+        Log.d(TAG, "remoteClipboardChanged called.");
         // Send a message containing the text to our handler.
         Message m = new Message();
         m.setTarget(handler);

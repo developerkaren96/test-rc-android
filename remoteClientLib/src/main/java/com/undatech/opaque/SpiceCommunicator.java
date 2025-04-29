@@ -188,12 +188,12 @@ public class SpiceCommunicator extends RfbConnectable {
     }
 
     public static void sendMessage(int message) {
-        android.util.Log.d(TAG, "sendMessage called with message: " + message);
+        Log.d(TAG, "sendMessage called with message: " + message);
         myself.handler.sendEmptyMessage(message);
     }
 
     public static void sendMessageWithText(int messageId, String messageText) {
-        android.util.Log.d(TAG, "sendMessageWithText called with messageId: "
+        Log.d(TAG, "sendMessageWithText called with messageId: "
                 + messageId + " and messageText: " + messageText);
         Bundle b = new Bundle();
         b.putString("message", messageText);
@@ -204,7 +204,7 @@ public class SpiceCommunicator extends RfbConnectable {
     }
 
     public static void LaunchVncViewer(String address, String port, String password) {
-        android.util.Log.d(TAG, "LaunchVncViewer called");
+        Log.d(TAG, "LaunchVncViewer called");
         Bundle b = new Bundle();
         b.putString("address", address);
         b.putString("port", port);
@@ -216,7 +216,7 @@ public class SpiceCommunicator extends RfbConnectable {
     }
 
     private static void AddVm(String vmname) {
-        android.util.Log.d(TAG, "Adding VM: " + vmname + "to list of VMs");
+        Log.d(TAG, "Adding VM: " + vmname + "to list of VMs");
         myself.vmNames.add(vmname);
     }
 
@@ -242,17 +242,17 @@ public class SpiceCommunicator extends RfbConnectable {
     }
 
     private static void OnMouseMode(boolean relative) {
-        android.util.Log.i(TAG, "OnMouseMode called, relative: " + relative);
+        Log.i(TAG, "OnMouseMode called, relative: " + relative);
         myself.canvas.mouseMode(relative);
     }
 
-    private static void ShowMessage(java.lang.String message) {
-        android.util.Log.i(TAG, "ShowMessage called, message: " + message);
+    private static void ShowMessage(String message) {
+        Log.i(TAG, "ShowMessage called, message: " + message);
         sendMessageWithText(RemoteClientLibConstants.SHOW_TOAST, message);
     }
 
     public static void OnRemoteClipboardChanged(String data) {
-        android.util.Log.d(TAG, "OnRemoteClipboardChanged called.");
+        Log.d(TAG, "OnRemoteClipboardChanged called.");
         myself.remoteClipboardChanged(data);
     }
 
@@ -302,7 +302,7 @@ public class SpiceCommunicator extends RfbConnectable {
      * Launches a new thread which performs a plain SPICE connection.
      */
     public void connectSpice(String ip, String port, String tport, String password, String cf, String ca, String cs, boolean sound) {
-        android.util.Log.d(TAG, "connectSpice: " + ip + ", " + port + ", " + tport + ", " + cf + ", " + cs);
+        Log.d(TAG, "connectSpice: " + ip + ", " + port + ", " + tport + ", " + cf + ", " + cs);
         thread = new SpiceThread(ip, port, tport, password, cf, ca, cs, sound);
         thread.start();
     }
@@ -321,7 +321,7 @@ public class SpiceCommunicator extends RfbConnectable {
             String ssoToken
     ) {
         boolean tokenNull = ssoToken == null;
-        android.util.Log.d(TAG, "connectOvirt: " + ip + ", " + vmname + ", " + user + ", tokenNull: " + tokenNull);
+        Log.d(TAG, "connectOvirt: " + ip + ", " + vmname + ", " + user + ", tokenNull: " + tokenNull);
         thread = new OvirtThread(ip, vmname, user, password, sslCaFile, sound, sslStrict, ssoToken);
         thread.start();
     }
@@ -330,7 +330,7 @@ public class SpiceCommunicator extends RfbConnectable {
      * Connects to an oVirt/RHEV server to fetch the names of all VMs available to the specified user.
      */
     public int startSessionFromVvFile(String vvFileName, boolean sound) {
-        android.util.Log.d(TAG, "Starting connection from vv file: " + vvFileName);
+        Log.d(TAG, "Starting connection from vv file: " + vvFileName);
         return StartSessionFromVvFile(vvFileName, sound);
     }
 
@@ -491,9 +491,9 @@ public class SpiceCommunicator extends RfbConnectable {
     /* END Callbacks from jni and corresponding non-static methods */
 
     public void requestResolution(int width, int height) {
-        android.util.Log.d(TAG, "requestResolution()");
+        Log.d(TAG, "requestResolution()");
         if (!isRequestingNewDisplayResolution) {
-            android.util.Log.d(TAG, "Requesting remote resolution is disabled");
+            Log.d(TAG, "Requesting remote resolution is disabled");
             return;
         }
         if (isInNormalProtocol) {
@@ -503,15 +503,15 @@ public class SpiceCommunicator extends RfbConnectable {
             if ((resolutionRequests == -1 || currentWidth != width || currentHeight != height) &&
                     resolutionRequests < maxResolutionRequests) {
                 canvas.waitUntilInflated();
-                android.util.Log.d(TAG, "Requesting new resolution: " + width + "x" + height);
+                Log.d(TAG, "Requesting new resolution: " + width + "x" + height);
                 SpiceRequestResolution(width, height);
                 writePointerEvent(0, 0, 0, 0, true);
                 resolutionRequests++;
             } else if (currentWidth == width && currentHeight == height) {
-                android.util.Log.d(TAG, "Resolution request satisfied, resetting resolutionRequests count");
+                Log.d(TAG, "Resolution request satisfied, resetting resolutionRequests count");
                 resolutionRequests = 0;
             } else {
-                android.util.Log.d(TAG, "Resolution request disabled or last request unsatisfied (resolution request loop?).");
+                Log.d(TAG, "Resolution request disabled or last request unsatisfied (resolution request loop?).");
                 isRequestingNewDisplayResolution = false;
             }
         }
@@ -532,7 +532,7 @@ public class SpiceCommunicator extends RfbConnectable {
     }
 
     public void onSettingsChanged(int width, int height, int bpp) {
-        android.util.Log.i(TAG, "onSettingsChanged called, wxh: " + width + "x" + height);
+        Log.i(TAG, "onSettingsChanged called, wxh: " + width + "x" + height);
 
         setFramebufferWidth(width);
         setFramebufferHeight(height);
@@ -567,7 +567,7 @@ public class SpiceCommunicator extends RfbConnectable {
 
         public void run() {
             SpiceClientConnect(ip, port, tport, password, cf, ca, cs, sound);
-            android.util.Log.d(TAG, "SpiceClientConnect returned.");
+            Log.d(TAG, "SpiceClientConnect returned.");
 
             // If we've exited SpiceClientConnect, the connection is certainly
             // interrupted or was never established.
@@ -612,7 +612,7 @@ public class SpiceCommunicator extends RfbConnectable {
                     ssoToken,
                     false
             );
-            android.util.Log.d(TAG, "CreateOvirtSession returned.");
+            Log.d(TAG, "CreateOvirtSession returned.");
 
             // If we've exited CreateOvirtSession, the connection is certainly
             // interrupted or was never established.
